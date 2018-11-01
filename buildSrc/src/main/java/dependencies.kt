@@ -2,7 +2,7 @@
 
 object Build {
     const val applicationId = "com.ivianuu.processingx.sample"
-    const val buildToolsVersion = "28.0.2"
+    const val buildToolsVersion = "28.0.3"
 
     const val compileSdk = 28
     const val minSdk = 14
