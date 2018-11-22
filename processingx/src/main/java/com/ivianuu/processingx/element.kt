@@ -52,4 +52,4 @@ fun Element.getAnnotatedAnnotations(clazz: KClass<out Annotation>) =
     getAnnotatedAnnotations(clazz.java)
 
 fun Element.getAnnotatedAnnotations(clazz: Class<out Annotation>) =
-    AnnotationMirrors.getAnnotatedAnnotations(this, clazz)
+    AnnotationMirrors.getAnnotatedAnnotations(this, clazz).toSet()
