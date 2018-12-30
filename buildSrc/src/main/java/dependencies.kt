@@ -19,9 +19,9 @@ object Versions {
     const val autoService = "1.0-rc4"
 
     const val javaPoet = "1.11.1"
-    const val kotlin = "1.3.10"
+    const val kotlin = "1.3.11"
     const val kotlinMetaData = "1.4.0"
-    const val kotlinPoet = "0.7.0"
+    const val kotlinPoet = "1.0.0"
     const val mavenGradle = "2.1"
 }
 
