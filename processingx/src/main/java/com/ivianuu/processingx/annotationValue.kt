@@ -3,6 +3,13 @@ package com.ivianuu.processingx
 import javax.lang.model.element.AnnotationValue
 import javax.lang.model.type.TypeMirror
 
+fun <T> AnnotationValue.value() = (value as T)
+fun <T> AnnotationValue.valueOrNull() = try {
+    value<T>()
+} catch (e: Exception) {
+    null
+}
+
 fun AnnotationValue.asTypeListValue(): List<TypeMirror> =
     (value as List<AnnotationValue>).map { it.value as TypeMirror }
 

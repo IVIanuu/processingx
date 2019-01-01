@@ -13,6 +13,12 @@ fun AnnotationMirror.getOrNull(name: String) = try {
     null
 }
 
+fun <T> AnnotationMirror.getAs(name: String) =
+    get(name).value<T>()
+
+fun <T> AnnotationMirror.getAsOrNull(name: String) =
+    get(name).valueOrNull<T>()
+
 fun AnnotationMirror.getAsTypeList(name: String) =
         get(name).asTypeListValue()
 
