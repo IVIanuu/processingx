@@ -38,14 +38,14 @@ fun Element.validate(): Boolean = when (this) {
 }
 
 @JvmName("validateAllElements")
-fun Iterable<Element>.validateAll() = all { it.validate() }
+fun Iterable<Element>.validateAll(): Boolean = all { it.validate() }
 
-fun Element.validateBase() = (asType().validate()
+fun Element.validateBase(): Boolean = (asType().validate()
         && annotationMirrors.validateAll()
         && enclosedElements.validateAll())
 
 @JvmName("validateAllTypes")
-fun Iterable<TypeMirror>.validateAll() =
+fun Iterable<TypeMirror>.validateAll(): Boolean =
     all { it.validate() }
 
 fun TypeMirror.validate(): Boolean = when (this) {
@@ -68,12 +68,12 @@ fun TypeMirror.validate(): Boolean = when (this) {
 
 }
 
-fun Iterable<AnnotationMirror>.validateAll() = all { it.validate() }
+fun Iterable<AnnotationMirror>.validateAll(): Boolean = all { it.validate() }
 
-fun AnnotationMirror.validate() =
+fun AnnotationMirror.validate(): Boolean =
     annotationType.validate() && elementValues.validateAll()
 
-fun Map<out ExecutableElement, AnnotationValue>.validateAll() =
+fun Map<out ExecutableElement, AnnotationValue>.validateAll(): Boolean =
     all { it.value.validate(it.key.returnType) }
 
 fun AnnotationValue.validate(

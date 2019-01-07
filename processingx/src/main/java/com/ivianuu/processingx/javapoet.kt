@@ -31,8 +31,8 @@ fun Class<*>.asJavaClassName(): ClassName = ClassName.get(this)
 
 fun TypeElement.asJavaClassName(): ClassName = ClassName.get(this)
 
-fun TypeVariable.asJavaTypeVariableName()
-        = (asElement() as TypeParameterElement).asJavaTypeVariableName()
+fun TypeVariable.asJavaTypeVariableName(): TypeVariableName =
+    (asElement() as TypeParameterElement).asJavaTypeVariableName()
 
 fun TypeParameterElement.asJavaTypeVariableName(): TypeVariableName {
     val name = simpleName.toString()
