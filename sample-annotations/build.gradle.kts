@@ -19,10 +19,6 @@ import java.io.File
 plugins {
     id("java-library")
     id("kotlin")
-    id("kotlin-kapt")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/java-compatibility-android.gradle")

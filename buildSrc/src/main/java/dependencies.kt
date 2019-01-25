@@ -13,7 +13,7 @@ object Build {
 
 object Versions {
     const val androidGradlePlugin = "3.3.0"
-    const val androidxAppCompat = "1.0.0"
+    const val androidxAppCompat = "1.0.2"
 
     const val autoCommon = "0.10"
     const val autoService = "1.0-rc4"
