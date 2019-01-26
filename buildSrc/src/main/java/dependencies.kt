@@ -11,12 +11,20 @@ object Build {
     const val versionName = "0.0.1"
 }
 
+object Publishing {
+    const val groupId = "com.ivianuu.processingx"
+    const val vcsUrl = "https://github.com/IVIanuu/processing-x"
+    const val version = "git"
+}
+
 object Versions {
     const val androidGradlePlugin = "3.3.0"
     const val androidxAppCompat = "1.0.2"
 
     const val autoCommon = "0.10"
     const val autoService = "1.0-rc4"
+
+    const val bintray = "1.8.4"
 
     const val javaPoet = "1.11.1"
     const val kotlin = "1.3.20"
@@ -31,6 +39,9 @@ object Deps {
     const val androidxAppCompat = "androidx.appcompat:appcompat:${Versions.androidxAppCompat}"
     const val autoCommon = "com.google.auto:auto-common:${Versions.autoCommon}"
     const val autoService = "com.google.auto.service:auto-service:${Versions.autoService}"
+
+    const val bintrayGradlePlugin =
+        "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintray}"
 
     const val javaPoet = "com.squareup:javapoet:${Versions.javaPoet}"
 
