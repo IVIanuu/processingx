@@ -14,25 +14,32 @@
  * limitations under the License.
  */
 
-package com.ivianuu.processingx
+package com.ivianuu.processingx.steps
 
 import com.google.common.collect.SetMultimap
+import com.ivianuu.processingx.ProcessingEnvHolder
+import com.ivianuu.processingx.validate
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
+import kotlin.reflect.KClass
 
 /**
  * @author Manuel Wrage (IVIanuu)
  */
-interface ProcessingStep {
+abstract class ProcessingStep : ProcessingEnvHolder {
 
-    fun init(processingEnv: ProcessingEnvironment) {
+    override val processingEnv: ProcessingEnvironment
+        get() = _processingEnv ?: error("cannot only accessed after init() was called")
+    private var _processingEnv: ProcessingEnvironment? = null
+
+    protected open fun init() {
     }
 
-    fun annotations(): Set<Class<out Annotation>>
+    abstract fun annotations(): Set<KClass<out Annotation>>
 
-    fun validate(
-        annotationClass: Class<out Annotation>,
+    open fun validate(
+        annotationClass: KClass<out Annotation>,
         element: Element
     ) = if (element.kind == ElementKind.PACKAGE) {
         element.validate()
@@ -40,11 +47,17 @@ interface ProcessingStep {
         element.getEnclosingType().validate()
     }
 
-    fun process(
-        elementsByAnnotation: SetMultimap<Class<out Annotation>, Element>
+    abstract fun process(
+        elementsByAnnotation: SetMultimap<KClass<out Annotation>, Element>
     ): Set<Element>
 
-    fun postRound(processingOver: Boolean) {
+    open fun postRound(
+        processingOver: Boolean
+    ) {
     }
 
+    internal fun performInit(processingEnv: ProcessingEnvironment) {
+        _processingEnv = processingEnv
+        init()
+    }
 }

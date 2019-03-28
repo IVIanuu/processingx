@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ivianuu.processingx
+package com.ivianuu.processingx.steps
 
 import com.google.auto.common.MoreElements.isAnnotationPresent
 import com.google.common.base.Ascii
@@ -34,6 +34,7 @@ import javax.lang.model.element.PackageElement
 import javax.lang.model.element.TypeElement
 import javax.lang.model.util.Elements
 import javax.tools.Diagnostic
+import kotlin.reflect.KClass
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -53,7 +54,7 @@ abstract class StepProcessor : AbstractProcessor() {
         super.init(processingEnv)
         elements = processingEnv.elementUtils
         messager = processingEnv.messager
-        steps.forEach { it.init(processingEnv) }
+        steps.forEach { it.performInit(processingEnv) }
     }
 
     override fun process(
@@ -78,13 +79,18 @@ abstract class StepProcessor : AbstractProcessor() {
         return false
     }
 
-    override fun getSupportedAnnotationTypes() = getSupportedAnnotationClasses()
-        .map { it.canonicalName }
-        .toSet()
+    override fun getSupportedAnnotationTypes(): Set<String> {
+        return getSupportedAnnotationClasses()
+            .map(KClass<*>::java)
+            .map(Class<*>::getCanonicalName)
+            .toSet()
+    }
 
-    private fun getSupportedAnnotationClasses() = steps
-        .flatMap(ProcessingStep::annotations)
-        .toSet()
+    private fun getSupportedAnnotationClasses(): Set<KClass<out Annotation>> {
+        return steps
+            .flatMap(ProcessingStep::annotations)
+            .toSet()
+    }
 
     protected abstract fun initSteps(): Iterable<ProcessingStep>
 
@@ -137,7 +143,7 @@ abstract class StepProcessor : AbstractProcessor() {
         deferredElementNamesBySteps.removeAll(step)
         val validElements = validElements(step, deferredElements, roundEnv)
 
-        val stepElements = ImmutableSetMultimap.Builder<Class<out Annotation>, Element>()
+        val stepElements = ImmutableSetMultimap.Builder<KClass<out Annotation>, Element>()
             .putAll(indexByAnnotation(elementsDeferredBySteps.get(step), step.annotations()))
             .putAll(
                 filterKeys(
@@ -155,7 +161,11 @@ abstract class StepProcessor : AbstractProcessor() {
                 step,
                 transform(
                     rejectedElements
-                ) { element -> ElementName.forAnnotatedElement(element!!) })
+                ) { element ->
+                    ElementName.forAnnotatedElement(
+                        element!!
+                    )
+                })
         }
     }
 
@@ -163,9 +173,9 @@ abstract class StepProcessor : AbstractProcessor() {
         step: ProcessingStep,
         deferredElements: Map<String, Element?>,
         roundEnv: RoundEnvironment
-    ): ImmutableSetMultimap<Class<out Annotation>, Element> {
+    ): ImmutableSetMultimap<KClass<out Annotation>, Element> {
         val deferredElementsByAnnotationBuilder =
-            ImmutableSetMultimap.builder<Class<out Annotation>, Element>()
+            ImmutableSetMultimap.builder<KClass<out Annotation>, Element>()
 
         for (deferredTypeElementEntry in deferredElements.entries) {
             val deferredElement = deferredTypeElementEntry.value
@@ -177,18 +187,21 @@ abstract class StepProcessor : AbstractProcessor() {
                 )
             } else {
                 deferredElementNamesBySteps.put(
-                    step, ElementName.forTypeName(deferredTypeElementEntry.key)
+                    step,
+                    ElementName.forTypeName(
+                        deferredTypeElementEntry.key
+                    )
                 )
             }
         }
 
         val deferredElementsByAnnotation = deferredElementsByAnnotationBuilder.build()
 
-        val validElements = ImmutableSetMultimap.builder<Class<out Annotation>, Element>()
+        val validElements = ImmutableSetMultimap.builder<KClass<out Annotation>, Element>()
 
         // Look at the elementUtils we've found and the new elementUtils from this round and validate them.
         for (annotationClass in step.annotations()) {
-            val elementsToValidate = roundEnv.getElementsAnnotatedWith(annotationClass)
+            val elementsToValidate = roundEnv.getElementsAnnotatedWith(annotationClass.java)
                 .union(deferredElementsByAnnotation.get(annotationClass))
 
             val (valid, deferred) = elementsToValidate.partition {
@@ -207,9 +220,9 @@ abstract class StepProcessor : AbstractProcessor() {
 
     private fun indexByAnnotation(
         annotatedElements: Set<ElementName>,
-        annotationClasses: Set<Class<out Annotation>>
-    ): ImmutableSetMultimap<Class<out Annotation>, Element> {
-        val deferredElements = ImmutableSetMultimap.builder<Class<out Annotation>, Element>()
+        annotationClasses: Set<KClass<out Annotation>>
+    ): ImmutableSetMultimap<KClass<out Annotation>, Element> {
+        val deferredElements = ImmutableSetMultimap.builder<KClass<out Annotation>, Element>()
 
         annotatedElements
             .mapNotNull { it.getElement(elements) }
@@ -220,8 +233,8 @@ abstract class StepProcessor : AbstractProcessor() {
 
     private fun findAnnotatedElements(
         element: Element,
-        annotationClasses: Set<Class<out Annotation>>,
-        annotatedElements: ImmutableSetMultimap.Builder<Class<out Annotation>, Element>
+        annotationClasses: Set<KClass<out Annotation>>,
+        annotatedElements: ImmutableSetMultimap.Builder<KClass<out Annotation>, Element>
     ) {
         element.enclosedElements
             .filter { !it.kind.isClass && !it.kind.isInterface }
@@ -234,7 +247,7 @@ abstract class StepProcessor : AbstractProcessor() {
             }
 
         annotationClasses
-            .filter { isAnnotationPresent(element, it) }
+            .filter { isAnnotationPresent(element, it.java) }
             .forEach { annotatedElements.put(it, element) }
     }
 
@@ -253,15 +266,26 @@ abstract class StepProcessor : AbstractProcessor() {
 
         companion object {
             fun forPackageName(packageName: String) =
-                ElementName(Kind.PACKAGE, packageName)
+                ElementName(
+                    Kind.PACKAGE,
+                    packageName
+                )
 
-            fun forTypeName(typeName: String) = ElementName(Kind.TYPE, typeName)
+            fun forTypeName(typeName: String) =
+                ElementName(
+                    Kind.TYPE,
+                    typeName
+                )
 
             fun forAnnotatedElement(element: Element) =
                 if (element.kind == ElementKind.PACKAGE) {
-                    forPackageName((element as PackageElement).qualifiedName.toString())
+                    forPackageName(
+                        (element as PackageElement).qualifiedName.toString()
+                    )
                 } else {
-                    forTypeName(element.getEnclosingType().qualifiedName.toString())
+                    forTypeName(
+                        element.getEnclosingType().qualifiedName.toString()
+                    )
                 }
         }
     }
