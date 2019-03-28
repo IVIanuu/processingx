@@ -17,9 +17,16 @@
 package com.ivianuu.processingx.sample.processor
 
 import com.google.auto.service.AutoService
+import com.google.common.collect.SetMultimap
 import com.ivianuu.processingx.ProcessingStep
 import com.ivianuu.processingx.StepProcessor
+import com.ivianuu.processingx.sample.MyAnnotation
+import me.eugeniomarletti.kotlin.metadata.KotlinClassMetadata
+import me.eugeniomarletti.kotlin.metadata.isDelegated
+import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
+import me.eugeniomarletti.kotlin.metadata.proto
 import javax.annotation.processing.Processor
+import javax.lang.model.element.Element
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -30,3 +37,23 @@ class MyProcessor : StepProcessor() {
     override fun initSteps() = emptySet<ProcessingStep>()
 
 }
+
+class TestStep : ProcessingStep {
+
+    override fun annotations() = setOf(MyAnnotation::class.java)
+
+    override fun process(elementsByAnnotation: SetMultimap<Class<out Annotation>, Element>): Set<Element> {
+        elementsByAnnotation[MyAnnotation::class.java]
+            .forEach {
+                val meta = it.kotlinMetadata as? KotlinClassMetadata ?: return@forEach
+                val properties = meta.data.proto.propertyList
+                properties.forEach {
+                    it.isDelegated
+                }
+            }
+
+        return emptySet()
+    }
+
+}
+

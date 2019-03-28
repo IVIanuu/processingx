@@ -36,7 +36,7 @@ fun TypeVariable.asJavaTypeVariableName(): TypeVariableName =
 
 fun TypeParameterElement.asJavaTypeVariableName(): TypeVariableName {
     val name = simpleName.toString()
-    val boundsTypeNames = bounds.map { it.asJavaTypeName() }.toTypedArray()
+    val boundsTypeNames = bounds.map(TypeMirror::asJavaTypeName).toTypedArray()
     return TypeVariableName.get(name, *boundsTypeNames)
 }
 

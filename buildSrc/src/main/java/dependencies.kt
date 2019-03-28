@@ -14,7 +14,7 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.processingx"
     const val vcsUrl = "https://github.com/IVIanuu/processing-x"
-    const val version = "${Build.versionName}-dev-1"
+    const val version = "${Build.versionName}-dev-2"
 }
 
 object Versions {
@@ -22,14 +22,14 @@ object Versions {
     const val androidxAppCompat = "1.0.2"
 
     const val autoCommon = "0.10"
-    const val autoService = "1.0-rc4"
+    const val autoService = "1.0-rc5"
 
     const val bintray = "1.8.4"
 
     const val javaPoet = "1.11.1"
-    const val kotlin = "1.3.20"
+    const val kotlin = "1.3.21"
     const val kotlinMetaData = "1.4.0"
-    const val kotlinPoet = "1.0.0"
+    const val kotlinPoet = "1.2.0"
     const val mavenGradle = "2.1"
 }
 

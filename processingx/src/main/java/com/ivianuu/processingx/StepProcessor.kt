@@ -40,7 +40,7 @@ import javax.tools.Diagnostic
  */
 abstract class StepProcessor : AbstractProcessor() {
 
-    private val steps by lazy(LazyThreadSafetyMode.NONE) { initSteps() }
+    private val steps by lazy(LazyThreadSafetyMode.NONE, this::initSteps)
 
     private lateinit var elements: Elements
     private lateinit var messager: Messager
@@ -83,7 +83,7 @@ abstract class StepProcessor : AbstractProcessor() {
         .toSet()
 
     private fun getSupportedAnnotationClasses() = steps
-        .flatMap { it.annotations() }
+        .flatMap(ProcessingStep::annotations)
         .toSet()
 
     protected abstract fun initSteps(): Iterable<ProcessingStep>
@@ -198,7 +198,7 @@ abstract class StepProcessor : AbstractProcessor() {
             validElements.putAll(annotationClass, valid)
 
             deferredElementNamesBySteps.putAll(step,
-                deferred.map { ElementName.forAnnotatedElement(it) }
+                deferred.map(ElementName.Companion::forAnnotatedElement)
             )
         }
 
