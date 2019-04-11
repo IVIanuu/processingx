@@ -22,7 +22,7 @@ fun Element.hasAnnotations(vararg classes: KClass<out Annotation>): Boolean =
     hasAnnotations(*classes.map { it.java }.toTypedArray())
 
 fun Element.hasAnnotations(vararg classes: Class<out Annotation>): Boolean =
-    classes.all(this::hasAnnotation)
+    classes.all { hasAnnotation(it) }
 
 fun Element.getAnnotationMirror(clazz: KClass<out Annotation>): AnnotationMirror =
     getAnnotationMirror(clazz.java)

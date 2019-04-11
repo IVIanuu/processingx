@@ -38,7 +38,7 @@ fun Element.validate(): Boolean = when (this) {
 }
 
 @JvmName("validateAllElements")
-fun Iterable<Element>.validateAll(): Boolean = all(Element::validate)
+fun Iterable<Element>.validateAll(): Boolean = all { it.validate() }
 
 fun Element.validateBase(): Boolean = (asType().validate()
         && annotationMirrors.validateAll()
@@ -46,7 +46,7 @@ fun Element.validateBase(): Boolean = (asType().validate()
 
 @JvmName("validateAllTypes")
 fun Iterable<TypeMirror>.validateAll(): Boolean =
-    all(TypeMirror::validate)
+    all { it.validate() }
 
 fun TypeMirror.validate(): Boolean = when (this) {
     is ArrayType -> componentType.validate()
@@ -68,7 +68,7 @@ fun TypeMirror.validate(): Boolean = when (this) {
 
 }
 
-fun Iterable<AnnotationMirror>.validateAll(): Boolean = all(AnnotationMirror::validate)
+fun Iterable<AnnotationMirror>.validateAll(): Boolean = all { it.validate() }
 
 fun AnnotationMirror.validate(): Boolean =
     annotationType.validate() && elementValues.validateAll()

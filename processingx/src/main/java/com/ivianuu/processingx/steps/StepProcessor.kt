@@ -41,7 +41,7 @@ import kotlin.reflect.KClass
  */
 abstract class StepProcessor : AbstractProcessor() {
 
-    private val steps by lazy(LazyThreadSafetyMode.NONE, this::initSteps)
+    private val steps by lazy(LazyThreadSafetyMode.NONE) { initSteps() }
 
     private lateinit var elements: Elements
     private lateinit var messager: Messager
@@ -81,14 +81,14 @@ abstract class StepProcessor : AbstractProcessor() {
 
     override fun getSupportedAnnotationTypes(): Set<String> {
         return getSupportedAnnotationClasses()
-            .map(KClass<*>::java)
-            .map(Class<*>::getCanonicalName)
+            .map { it.java }
+            .map { it.canonicalName }
             .toSet()
     }
 
     private fun getSupportedAnnotationClasses(): Set<KClass<out Annotation>> {
         return steps
-            .flatMap(ProcessingStep::annotations)
+            .flatMap { it.annotations() }
             .toSet()
     }
 
@@ -211,7 +211,7 @@ abstract class StepProcessor : AbstractProcessor() {
             validElements.putAll(annotationClass, valid)
 
             deferredElementNamesBySteps.putAll(step,
-                deferred.map(ElementName.Companion::forAnnotatedElement)
+                deferred.map { ElementName.forAnnotatedElement(it) }
             )
         }
 
