@@ -19,7 +19,7 @@ object Publishing {
 
 object Versions {
     const val androidGradlePlugin = "3.3.0"
-    const val androidxAppCompat = "1.0.2"
+    const val androidxAppCompat = "1.1.0-alpha04"
 
     const val autoCommon = "0.10"
     const val autoService = "1.0-rc5"
@@ -27,7 +27,7 @@ object Versions {
     const val bintray = "1.8.4"
 
     const val javaPoet = "1.11.1"
-    const val kotlin = "1.3.21"
+    const val kotlin = "1.3.30"
     const val kotlinMetaData = "1.4.0"
     const val kotlinPoet = "1.2.0"
     const val mavenGradle = "2.1"
