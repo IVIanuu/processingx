@@ -26,6 +26,9 @@ dependencies {
     api(Deps.autoCommon)
     api(Deps.autoService)
 
+    api(Deps.gradleIncapHelper)
+    api(Deps.gradleIncapHelperProcessor)
+
     api(Deps.javaPoet)
 
     api(Deps.kotlinMetaData)

@@ -1,0 +1,2 @@
+com.google.auto.service.processor.AutoServiceProcessor,AGGREGATING
+net.ltgt.gradle.incap.processor.IncrementalAnnotationProcessorProcessor,AGGREGATING

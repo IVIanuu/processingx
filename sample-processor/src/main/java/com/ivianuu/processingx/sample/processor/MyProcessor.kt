@@ -25,6 +25,8 @@ import me.eugeniomarletti.kotlin.metadata.KotlinClassMetadata
 import me.eugeniomarletti.kotlin.metadata.isDelegated
 import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
 import me.eugeniomarletti.kotlin.metadata.proto
+import net.ltgt.gradle.incap.IncrementalAnnotationProcessor
+import net.ltgt.gradle.incap.IncrementalAnnotationProcessorType.ISOLATING
 import javax.annotation.processing.Processor
 import javax.lang.model.element.Element
 import kotlin.reflect.KClass
@@ -33,6 +35,7 @@ import kotlin.reflect.KClass
  * @author Manuel Wrage (IVIanuu)
  */
 @AutoService(Processor::class)
+@IncrementalAnnotationProcessor(ISOLATING)
 class MyProcessor : StepProcessor() {
 
     override fun initSteps() = emptySet<ProcessingStep>()

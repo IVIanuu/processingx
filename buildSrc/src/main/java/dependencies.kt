@@ -14,11 +14,11 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.processingx"
     const val vcsUrl = "https://github.com/IVIanuu/processing-x"
-    const val version = "${Build.versionName}-dev-2"
+    const val version = "${Build.versionName}-dev-3"
 }
 
 object Versions {
-    const val androidGradlePlugin = "3.3.0"
+    const val androidGradlePlugin = "3.4.1"
     const val androidxAppCompat = "1.1.0-alpha04"
 
     const val autoCommon = "0.10"
@@ -26,10 +26,12 @@ object Versions {
 
     const val bintray = "1.8.4"
 
+    const val gradleIncapHelper = "0.2"
+
     const val javaPoet = "1.11.1"
-    const val kotlin = "1.3.30"
+    const val kotlin = "1.3.31"
     const val kotlinMetaData = "1.4.0"
-    const val kotlinPoet = "1.2.0"
+    const val kotlinPoet = "1.3.0"
     const val mavenGradle = "2.1"
 }
 
@@ -42,6 +44,10 @@ object Deps {
 
     const val bintrayGradlePlugin =
         "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintray}"
+
+    const val gradleIncapHelper = "net.ltgt.gradle.incap:incap:${Versions.gradleIncapHelper}"
+    const val gradleIncapHelperProcessor =
+        "net.ltgt.gradle.incap:incap-processor:${Versions.gradleIncapHelper}"
 
     const val javaPoet = "com.squareup:javapoet:${Versions.javaPoet}"
 
