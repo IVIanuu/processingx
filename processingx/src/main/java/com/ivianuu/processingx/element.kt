@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 fun Element.getPackage(): PackageElement = MoreElements.getPackage(this)
 
 inline fun <reified T : Annotation> Element.hasAnnotation(): Boolean =
-        hasAnnotation(T::class)
+    hasAnnotation(T::class)
 
 fun Element.hasAnnotation(clazz: KClass<out Annotation>): Boolean =
     hasAnnotation(clazz.java)
@@ -41,7 +41,7 @@ fun Element.getAnnotationMirrorOrNull(clazz: Class<out Annotation>): AnnotationM
 }
 
 inline fun <reified T : Annotation> Element.getAnnotationMirror(): AnnotationMirror =
-        getAnnotationMirror(T::class)
+    getAnnotationMirror(T::class)
 
 inline fun <reified T : Annotation> Element.getAnnotationMirrorOrNull(): AnnotationMirror? =
     getAnnotationMirrorOrNull(T::class)

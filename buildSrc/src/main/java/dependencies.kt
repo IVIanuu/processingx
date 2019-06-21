@@ -29,7 +29,7 @@ object Versions {
     const val gradleIncapHelper = "0.2"
 
     const val javaPoet = "1.11.1"
-    const val kotlin = "1.3.31"
+    const val kotlin = "1.3.40"
     const val kotlinMetaData = "1.4.0"
     const val kotlinPoet = "1.3.0"
     const val mavenGradle = "2.1"
@@ -53,12 +53,14 @@ object Deps {
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 
-    const val kotlinMetaData = "me.eugeniomarletti.kotlin.metadata:kotlin-metadata:${Versions.kotlinMetaData}"
+    const val kotlinMetaData =
+        "me.eugeniomarletti.kotlin.metadata:kotlin-metadata:${Versions.kotlinMetaData}"
 
     const val kotlinPoet = "com.squareup:kotlinpoet:${Versions.kotlinPoet}"
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
 
-    const val mavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:${Versions.mavenGradle}"
+    const val mavenGradlePlugin =
+        "com.github.dcendents:android-maven-gradle-plugin:${Versions.mavenGradle}"
 }

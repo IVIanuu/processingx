@@ -6,7 +6,7 @@ import javax.lang.model.element.AnnotationValue
 import javax.lang.model.type.TypeMirror
 
 operator fun AnnotationMirror.get(name: String): AnnotationValue =
-        AnnotationMirrors.getAnnotationValue(this, name)
+    AnnotationMirrors.getAnnotationValue(this, name)
 
 fun AnnotationMirror.getOrNull(name: String): AnnotationValue? = try {
     get(name)
@@ -20,19 +20,19 @@ fun <T> AnnotationMirror.getAsOrNull(name: String): T? =
     get(name).valueOrNull<T>()
 
 fun AnnotationMirror.getAsTypeList(name: String): List<TypeMirror> =
-        get(name).asTypeListValue()
+    get(name).asTypeListValue()
 
 fun AnnotationMirror.getAsTypeListOrNull(name: String): List<TypeMirror>? =
-        get(name).asTypeListValueOrNull()
+    get(name).asTypeListValueOrNull()
 
 fun AnnotationMirror.getAsStringList(name: String): List<String> =
-        get(name).asStringListValue()
+    get(name).asStringListValue()
 
 fun AnnotationMirror.getAsStringListOrNull(name: String): List<String>? =
-        get(name).asStringListValueOrNull()
+    get(name).asStringListValueOrNull()
 
 fun AnnotationMirror.getAsType(name: String): TypeMirror =
-        get(name).asTypeValue()
+    get(name).asTypeValue()
 
 fun AnnotationMirror.getAsTypeOrNull(name: String): TypeMirror? =
-        get(name).asTypeValueOrNull()
+    get(name).asTypeValueOrNull()
