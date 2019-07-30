@@ -4,9 +4,9 @@ object Build {
     const val applicationId = "com.ivianuu.processingx.sample"
     const val buildToolsVersion = "28.0.3"
 
-    const val compileSdk = 28
+    const val compileSdk = 29
     const val minSdk = 14
-    const val targetSdk = 28
+    const val targetSdk = 29
     const val versionCode = 1
     const val versionName = "0.0.1"
 }
@@ -14,7 +14,7 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.processingx"
     const val vcsUrl = "https://github.com/IVIanuu/processing-x"
-    const val version = "${Build.versionName}-dev-3"
+    const val version = "${Build.versionName}-dev-4"
 }
 
 object Versions {
