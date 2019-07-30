@@ -5,9 +5,15 @@
       <module fileurl="file://$PROJECT_DIR$/ProcessingX.iml" filepath="$PROJECT_DIR$/ProcessingX.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/processingx/processingx.iml" filepath="$PROJECT_DIR$/processingx/processingx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/processingx/processingx-processingx.iml" filepath="$PROJECT_DIR$/processingx/processingx-processingx.iml" group="processingx/processingx" />
+      <module fileurl="file://$PROJECT_DIR$/buildSrc/processingx.buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/processingx.buildSrc.iml" group="buildSrc" />
+      <module fileurl="file://$PROJECT_DIR$/sample/processingx.sample.iml" filepath="$PROJECT_DIR$/sample/processingx.sample.iml" group="processingx/sample" />
+      <module fileurl="file://$PROJECT_DIR$/sample-annotations/processingx.sample-annotations.iml" filepath="$PROJECT_DIR$/sample-annotations/processingx.sample-annotations.iml" group="processingx/sample-annotations" />
+      <module fileurl="file://$PROJECT_DIR$/sample-processor/processingx.sample-processor.iml" filepath="$PROJECT_DIR$/sample-processor/processingx.sample-processor.iml" group="processingx/sample-processor" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample-annotations/sample-annotations.iml" filepath="$PROJECT_DIR$/sample-annotations/sample-annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample-processor/sample-processor.iml" filepath="$PROJECT_DIR$/sample-processor/sample-processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/studio-projects.processingx.iml" filepath="$PROJECT_DIR$/studio-projects.processingx.iml" group="processingx" />
     </modules>
   </component>
 </project>
