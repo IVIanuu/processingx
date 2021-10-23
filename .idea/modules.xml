@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProcessingX.iml" filepath="$PROJECT_DIR$/ProcessingX.iml" />
-      <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/processingx/processingx.iml" filepath="$PROJECT_DIR$/processingx/processingx.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample-annotations/sample-annotations.iml" filepath="$PROJECT_DIR$/sample-annotations/sample-annotations.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample-processor/sample-processor.iml" filepath="$PROJECT_DIR$/sample-processor/sample-processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/processingx.iml" filepath="$PROJECT_DIR$/.idea/modules/processingx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/processingx.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/processingx.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/processingx/processingx.processingx.iml" filepath="$PROJECT_DIR$/.idea/modules/processingx/processingx.processingx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/processingx.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/processingx.sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample-annotations/processingx.sample-annotations.iml" filepath="$PROJECT_DIR$/.idea/modules/sample-annotations/processingx.sample-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample-processor/processingx.sample-processor.iml" filepath="$PROJECT_DIR$/.idea/modules/sample-processor/processingx.sample-processor.iml" />
     </modules>
   </component>
 </project>
